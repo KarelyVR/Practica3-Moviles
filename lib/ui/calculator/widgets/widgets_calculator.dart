@@ -1,4 +1,6 @@
 
+// ignore_for_file: use_key_in_widget_constructors, sort_child_properties_last
+
 import 'package:flutter/material.dart';
 
 class MyTextInput extends StatelessWidget {
@@ -63,7 +65,7 @@ final VoidCallback press;
           color: Colors.white,fontSize: 14, fontWeight: FontWeight.w500
         )
       ),
-      child: const Text("Botón"));
+      child: const Text("Calcular"));
   }
 }
 
@@ -106,40 +108,40 @@ class MyBarContainer extends StatelessWidget {
   }
 }
 
-class MyTable extends StatelessWidget {
+// class MyTable extends StatelessWidget {
  
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width*0.7,
-      child: Table(border: TableBorder.all(),
-      children: const [
-        TableRow(children: [
-          Text('Menor a 18.5'),
-          Text('Peso Bajo')
-        ]),
-        TableRow(children: [
-          Text('18.6 a 24.9'),
-          Text('Peso Normal')
-        ]),
-        TableRow(children: [
-          Text('25 a 29.9'),
-          Text('Sobrepeso')
-        ]),
-        TableRow(children: [
-          Text('30 a 34.9'),
-          Text('Obsesidad leve')
-        ]),
-        TableRow(children: [
-          Text('35 a 39.9'),
-          Text('Obesidad media')
-        ]),
-        TableRow(children: [
-          Text('Mayor a 40'),
-          Text('Obesidad morbida')
-        ]),
-      ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: MediaQuery.of(context).size.width*0.7,
+//       child: Table(border: TableBorder.all(),
+//       children: const [
+//         TableRow(children: [
+//           Text('Menor a 18.5'),
+//           Text('Peso Bajo')
+//         ]),
+//         TableRow(children: [
+//           Text('18.6 a 24.9'),
+//           Text('Peso Normal')
+//         ]),
+//         TableRow(children: [
+//           Text('25 a 29.9'),
+//           Text('Sobrepeso')
+//         ]),
+//         TableRow(children: [
+//           Text('30 a 34.9'),
+//           Text('Obsesidad leve')
+//         ]),
+//         TableRow(children: [
+//           Text('35 a 39.9'),
+//           Text('Obesidad media')
+//         ]),
+//         TableRow(children: [
+//           Text('Mayor a 40'),
+//           Text('Obesidad morbida')
+//         ]),
+//       ],
+//       ),
+//     );
+//   }
+// }
