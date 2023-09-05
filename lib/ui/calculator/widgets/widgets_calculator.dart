@@ -1,30 +1,33 @@
-
 // ignore_for_file: use_key_in_widget_constructors, sort_child_properties_last
 
 import 'package:flutter/material.dart';
 
 class MyTextInput extends StatelessWidget {
-  const MyTextInput({super.key, required this.inputController, required this.label});
+  const MyTextInput(
+      {super.key, required this.inputController, required this.label});
 
-final TextEditingController inputController;
-final String label;
+  final TextEditingController inputController;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 300,
       child: Padding(
-        padding: const EdgeInsets.only(left:70,right:70),
+        padding: const EdgeInsets.only(left: 70, right: 70),
         child: TextFormField(
           controller: inputController,
           keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                border: const UnderlineInputBorder(),
-                prefixIcon: const Icon(Icons.person),
-                labelStyle: const TextStyle(color: Colors.black38),
-                labelText: label,
-              ),
-      ),
+          decoration: InputDecoration(
+            border: const UnderlineInputBorder(),
+            prefixIcon: const Icon(
+              Icons.monetization_on,
+              color: Color.fromARGB(255, 37, 145, 40),
+            ),
+            labelStyle: const TextStyle(color: Colors.black38),
+            labelText: label,
+          ),
+        ),
       ),
     );
   }
@@ -32,18 +35,16 @@ final String label;
 
 // ignore: must_be_immutable
 class MyText extends StatelessWidget {
-   MyText({super.key, required this.text});
+  MyText({super.key, required this.text});
 
   String text;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      text, 
-      style:const TextStyle(
-        color: Colors.black87,
-        fontSize: 17,
-        fontWeight: FontWeight.bold),
+      text,
+      style: const TextStyle(
+          color: Colors.black87, fontSize: 20, fontWeight: FontWeight.bold),
     );
   }
 }
@@ -51,21 +52,21 @@ class MyText extends StatelessWidget {
 class MyButton extends StatelessWidget {
   const MyButton({super.key, required this.lblText, required this.press});
 
-final Text lblText;
-final VoidCallback press;
+  final Text lblText;
+  final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: press, 
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue,
-        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-        textStyle: const TextStyle(
-          color: Colors.white,fontSize: 14, fontWeight: FontWeight.w500
-        )
-      ),
-      child: const Text("Calcular"));
+        onPressed: press,
+        style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 202, 110, 255),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            textStyle: const TextStyle(
+                color: Color.fromARGB(255, 0, 0, 0),
+                fontSize: 17,
+                fontWeight: FontWeight.w500)),
+        child: const Text("Calcular"));
   }
 }
 
@@ -79,30 +80,27 @@ class MyContainer extends StatelessWidget {
     return Container(
       height: 900,
       child: child,
-      margin: const EdgeInsets.only(top:20),
+      margin: const EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(31, 204, 202, 202).withOpacity(0.5),
+        color: Color.fromARGB(255, 185, 186, 255).withOpacity(0.5),
         borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(40),
-          bottomLeft: Radius.circular(40),
-        ), 
+          topRight: Radius.circular(0),
+          bottomLeft: Radius.circular(0),
+        ),
       ),
     );
   }
 }
 
 class MyBarContainer extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
-      margin: const EdgeInsets.only(top:20),
+      height: 15,
+      margin: const EdgeInsets.only(top: 0),
       decoration: const BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(70)
-        ), 
+        color: Color.fromARGB(255, 202, 110, 255),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(0)),
       ),
     );
   }
