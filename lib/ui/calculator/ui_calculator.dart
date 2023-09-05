@@ -1,4 +1,7 @@
+// ignore_for_file: use_key_in_widget_constructors, prefer_interpolation_to_compose_strings, prefer_final_fields, avoid_print
+
 import 'package:flutter/material.dart';
+import 'widgets/widgets_calculator.dart';
 
 class MyWidget extends StatefulWidget {
   const MyWidget({Key? key});
@@ -13,28 +16,58 @@ class _MyWidgetState extends State<MyWidget> {
   double conv = 0.0;
 
   Map<String, double> valoresAsociados = {
-    'Dólar': 17.21,
-    'Euro': 18.58,
-    'Sol Peruano': 4.65,
+    'Dólar': 17.39,
+    'Euro': 18.64,
     'Yen': 0.12,
+    'Libra Esterlina': 21.87,
+    'Dólar canadiense': 12.76,
+    'Rupia india': 0.20,
+    'Sol Peruano': 4.70,
+    'Peso Argentino':0.049,
   };
 
   String valorSeleccionado = 'Dólar';
 
-  void _calcular() {
-    setState(() {
-      double peso = double.parse(_pesoController.text);
-      double divisa = valoresAsociados[valorSeleccionado] ?? 1.0;
+void _calcular() {
+  setState(() {
+    String pesoText = _pesoController.text;
+    // Verifica si el campo está vacío o no
+    if (pesoText.isNotEmpty) {
+      // Si no está vacío, realiza la conversión
+      double peso = double.parse(pesoText);
+      double divisa = 1.0;
+
+      try {
+        divisa = valoresAsociados[valorSeleccionado] ?? 1.0;
+      } catch (e) {
+        showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const ErrorAlertDialog(errorMessage: 'Valor no valido');
+        },
+      );
+      }
+
       conv = peso / divisa;
       respuesta = conv.toStringAsFixed(1);
-    });
-  }
+    } else {
+      // Si el campo está vacío
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const ErrorAlertDialog(errorMessage: 'El campo de entrada está vacío');
+        },
+      );
+    }
+  });
+}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Conversor de Divisas'),
+        backgroundColor: Colors.amber,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -67,21 +100,18 @@ class _MyWidgetState extends State<MyWidget> {
               ),
             ),
             const SizedBox(height: 30.0),
-            Container(
-              margin: const EdgeInsets.only(top: 30.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 231, 150, 255),
-                ),
-                onPressed: () => _calcular(),
-                child: const Text("Calcular"),
+            _sizeEspacio(),
+            const MyText(
+              text: "Resultado de la conversión", 
+              fontWeight: FontWeight.bold,
               ),
+            MyText(
+              text: respuesta.toString() + " " + valorSeleccionado,
             ),
-            const SizedBox(height: 220.0),
+            const SizedBox(height: 80.0),
             Align(
-              alignment: Alignment.bottomLeft,
-              child: Container(
-                padding: const EdgeInsets.all(16.0),
+              alignment: Alignment.center,
+              child: MyContainer(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -104,67 +134,6 @@ class _MyWidgetState extends State<MyWidget> {
   }
 }
 
-class MyText extends StatelessWidget {
-  final String text;
-  final double fontSize;
-  final FontWeight fontWeight;
-
-  const MyText({
-    required this.text,
-    this.fontSize = 16.0,
-    this.fontWeight = FontWeight.normal,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-      ),
-    );
+Widget _sizeEspacio() {
+    return const SizedBox(height: 30);
   }
-}
-
-class MyButton extends StatelessWidget {
-  final Text lblText;
-  final Function() press;
-
-  const MyButton({
-    required this.lblText,
-    required this.press,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: press,
-      child: lblText,
-    );
-  }
-}
-
-class MyTextInput extends StatelessWidget {
-  final TextEditingController inputController;
-  final String label;
-
-  const MyTextInput({
-    required this.inputController,
-    required this.label,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-        controller: inputController,
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(
-            labelText: label,
-            border: const OutlineInputBorder(),
-            prefixIcon: const Icon(
-              Icons.attach_money,
-              color: Color.fromARGB(255, 9, 194, 15),
-            )));
-  }
-}
